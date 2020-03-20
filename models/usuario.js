@@ -7,9 +7,9 @@ const getAll = () => {
     })
 }
 
-const create = ({ name, password, email }) => {
+const create = ({ name, password, image, email }) => {
     return new Promise((resolve, reject) => {
-        db.query('insert into usuarios (name , password, email ) values (?,?,?)', [name, password, email], (err, result) => {
+        db.query('insert into usuarios (name , password, image, email ) values (?,?,?,?)', [name, password, image, email], (err, result) => {
             if (err) reject(err);
             resolve(result);
         })
@@ -37,13 +37,13 @@ const getUser = (id) => {
     })
 }
 
-const update = ({ name, lastName, password, email }) => {
+const update = ({ name, password, image, email }, id) => {
+    //console.log({ name, password, image, email })
     return new Promise((resolve, reject) => {
-        db.query('update usuarios set name=?, lastName=?, password=?, email=? ', [name, lastName, password, email]), (err, result) => {
-            console.log(err)
+        db.query('update usuarios set name=?, password=?, image=?, email=? where id = ?', [name, password, image, email, id], (err, result) => {
             if (err) reject(err);
             resolve(result);
-        }
+        })
     });
 }
 

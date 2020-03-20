@@ -23,6 +23,7 @@ router.post('/register', [
 
     const passwordEnc = bcrypt.hashSync(req.body.password, 10);
     req.body.password = passwordEnc;
+
     const result = await Usuario.create(req.body);
     if (result.affectedRows === 1) {
         const user = Usuario.getUser(result.insertId);
@@ -61,11 +62,18 @@ router.post('/login', async (req, res) => {
 });
 
 // http://localhost:3000/api/usuarios/edit/id
-router.put('/edit/:usuarioId', (req, res) => {
-    Usuario.getUser(req.params.usuarioId, (err, usuario) => {
-        if (err) return res.json(err);
-        res.render('/usuarioEdit', { user: usuario });
-    })
+router.put('/edit/:usuarioId', async (req, res) => {
+    // console.log(req.body, req.params.usuarioId
+    const passwordEnc = bcrypt.hashSync(req.body.password, 10);
+    req.body.password = passwordEnc;
+
+    const result = await Usuario.update(req.body, req.params.usuarioId);
+
+    if (result) {
+        res.json(result)
+    } else {
+        res.json({ error: 'Error al actualizar usuario' })
+    }
 });
 
 // http://localhost:3000/api/delete/id
