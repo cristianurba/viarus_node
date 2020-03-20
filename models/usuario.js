@@ -54,6 +54,7 @@ const deleteById = (id) => {
                 if (err) reject(err);
                 resolve(result);
             })
+        console.log(id)
     });
 }
 

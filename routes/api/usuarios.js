@@ -76,10 +76,19 @@ router.put('/edit/:usuarioId', async (req, res) => {
     }
 });
 
-// http://localhost:3000/api/delete/id
-router.delete('/delete/:usuarioId', async (req, res) => {
+//http://localhost:3000/api/usuarios/id
+router.delete('/:usuarioId', async (req, res) => {
+    //console.log('Llegamos')
     await Usuario.deleteById(req.params.usuarioId)
     res.redirect('/');
+
+    /* const result = await Usuario.deleteById(req.body.usuarioId);
+    if (result['affectedRows'] === 1) {
+        res.json({ success: 'Nos alegramos de que ya estes sano' });
+    } else {
+        res.json({ error: 'Usuario no borrado' })
+    } */
+
 });
 
 module.exports = router;
