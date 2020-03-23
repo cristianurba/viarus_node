@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const Mensaje = require('../../models/mensaje');
 
-const mensajeId: pMensajesId;
+//const mensajeId: pMensajesId;
 
 
 //http://localhost:3000/api/mensajes/new
@@ -25,8 +25,8 @@ router.put('/update', async (req, res) => {
 
 //http://localhost:3000/api/mensajes/id
 router.delete('/:mensajeId', async (req, res) => {
-    //console.log('Llegamos')
-    await Mensaje.deleteById(req.params.mensajeId)
+    MensajesId: pMensaje.id,
+        await Mensaje.deleteById(req.params.MensajesId)
     res.redirect('/');
 });
 
