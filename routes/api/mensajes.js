@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const Mensaje = require('../../models/mensaje');
 
-const mensajeId: pMensajesId;
+/* const mensajeId: pMensajesId; */
 
 
 //http://localhost:3000/api/mensajes/new

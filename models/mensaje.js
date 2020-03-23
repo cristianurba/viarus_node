@@ -7,9 +7,9 @@ const getAll = () => {
     })
 }
 
-const create = ({ message, userId }) => {
+const create = ({ mensaje, fk_usuario }) => {
     return new Promise((resolve, reject) => {
-        db.query('insert into mensajes (message , userId ) values (?,?)', [message, userId], (err, result) => {
+        db.query('insert into mensajes (mensaje, fk_usuario) values (?, ?)', [mensaje, fk_usuario], (err, result) => {
             if (err) reject(err);
             resolve(result);
         })
