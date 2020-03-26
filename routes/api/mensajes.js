@@ -3,17 +3,7 @@ const router = require('express').Router();
 const Mensaje = require('../../models/mensaje');
 const middleWares = require('../middlewares');
 
-<<<<<<< HEAD
-
-//http://localhost:3000/api/mensajes/getall
-
-router.get('/getall', async (req, res) => {
-    const rows = await Mensaje.getAll();
-    res.json(rows);
-})
-=======
 router.use(middleWares.checkToken);
->>>>>>> e426e63900e15c107067677623bdd4806236daba
 
 // GET http://localhost:3000/api/mensajes/
 router.get('/', async (req, res) => {
@@ -43,12 +33,7 @@ router.put('/edit/:mensajeId', async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
-
-//http://localhost:3000/api/mensajes/id
-=======
 /* //http://localhost:3000/api/mensajes/id
->>>>>>> e426e63900e15c107067677623bdd4806236daba
 router.delete('/:mensajeId', async (req, res) => {
     await Mensaje.deleteById(req.params.mensajeId)
     res.redirect('/');
