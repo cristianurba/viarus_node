@@ -7,7 +7,6 @@ router.use(middleWares.checkToken);
 
 // GET http://localhost:3000/api/mensajes/
 router.get('/', async (req, res) => {
-    console.log(req.headers);
     const rows = await Mensaje.getAll();
     res.json(rows);
 });
@@ -41,7 +40,6 @@ router.delete('/:mensajeId', async (req, res) => {
 
 //http://localhost:3000/api/mensajes/
 router.delete('/', async (req, res) => {
-    console.log(req.body.id)
     await Mensaje.deleteById(req.body.id)
     res.json('Se ha borrado el mensaje');
 });

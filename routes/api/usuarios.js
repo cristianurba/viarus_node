@@ -36,7 +36,7 @@ const createToken = (pUser) => {
     const payload = {
         usuarioId: pUser.id,
         fechaCreacion: moment().unix(),
-        fechaExpiracion: moment().add(15, 'minutes').unix()
+        fechaExpiracion: moment().add(45, 'minutes').unix()
     }
 
     return jwt.encode(payload, process.env.SECRET_KEY);
@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
         console.log(req.body.password, user.password);
         const iguales = bcrypt.compareSync(req.body.password, user.password);
         if (iguales) {
-            res.json({ token: createToken(user) })
+            res.json({ token: createToken(user), userId: user.id })
         } else {
             res.status(401).json({ error: 'Error en email y/o password' })
         }
