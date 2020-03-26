@@ -1,6 +1,6 @@
 const getAll = () => {
     return new Promise((resolve, reject) => {
-        db.query('select * from mensajes', (err, rows) => {
+        db.query('select * from mensajes inner join usuarios on fk_usuario = usuarios.id order by fecha_creacion DESC', (err, rows) => {
             if (err) reject(err);
             resolve(rows);
         })
