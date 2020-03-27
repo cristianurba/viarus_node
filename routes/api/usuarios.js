@@ -3,9 +3,15 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const jwt = require('jwt-simple');
 const { check, validationResult } = require('express-validator');
-
+const middleware = require('../middlewares');
 
 const Usuario = require('../../models/usuario');
+
+// http://localhost:3000/api/usuarios
+router.get('/', middleware.checkToken, async (req, res) => {
+    const rows = await Usuario.getUser(req.payload.usuarioId);
+    res.json(rows);
+});
 
 // http://localhost:3000/api/usuarios/register
 router.post('/register', [
