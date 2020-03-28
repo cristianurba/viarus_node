@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 //http://localhost:3000/api/mensajes/new
 router.post('/new', async (req, res) => {
     console.log(req.payload.usuarioId);
-    req.body.fk_usuario = req.payload.usuarioId
+    req.body.fk_usuario = req.payload.usuarioId;
     const result = await Mensaje.create(req.body);
     res.json(result);
 });
