@@ -33,7 +33,7 @@ router.post('/register', [
     const result = await Usuario.create(req.body);
     if (result.affectedRows === 1) {
         const user = Usuario.getUser(result.insertId);
-        res.json({ token: createToken(user), id: result.insertId })
+        res.json({ token: createToken(user), id: result.insertId, userId: user.id })
     };
 
 });
@@ -67,13 +67,11 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// http://localhost:3000/api/usuarios/edit/id
-router.put('/edit/:usuarioId', async (req, res) => {
+// http://localhost:3000/api/usuarios/edit
+router.put('/edit', async (req, res) => {
     // console.log(req.body, req.params.usuarioId
-    const passwordEnc = bcrypt.hashSync(req.body.password, 10);
-    req.body.password = passwordEnc;
 
-    const result = await Usuario.update(req.body, req.params.usuarioId);
+    const result = await Usuario.update(req.body);
 
     if (result) {
         res.json(result)
