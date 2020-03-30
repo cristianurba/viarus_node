@@ -11,6 +11,13 @@ router.get('/', async (req, res) => {
     res.json(rows);
 });
 
+//GET http://localhost:3000/api/mensajes/find
+router.post('/find', async (req, res) => {
+    console.log('FIND', req.body);
+    const rows = await Mensaje.find(req.body.busqueda);
+    res.json(rows);
+})
+
 //http://localhost:3000/api/mensajes/new
 router.post('/new', async (req, res) => {
     console.log(req.payload.usuarioId);
@@ -18,25 +25,6 @@ router.post('/new', async (req, res) => {
     const result = await Mensaje.create(req.body);
     res.json(result);
 });
-
-
-//PUT http://localhost:3000/api/mensajes/
-router.put('/update', async (req, res) => {
-    const result = await Mensaje.update(req.body);
-
-    if (result['affectedRows'] === 1) {
-        res.json({ success: 'El ejercicio se ha actualizado' });
-    } else {
-        res.json({ error: "El ejercicio no se ha actualizado" });
-    }
-});
-
-/* //http://localhost:3000/api/mensajes/id
-router.delete('/:mensajeId', async (req, res) => {
-    //console.log('Llegamos')
-    await Mensaje.deleteById(req.params.mensajeId)
-    res.redirect('/');
-}); */
 
 //http://localhost:3000/api/mensajes/
 router.delete('/', async (req, res) => {
