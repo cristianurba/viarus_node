@@ -17,7 +17,7 @@ const create = ({ mensaje, fk_usuario }) => {
     })
 }
 
-<<<<<<< HEAD
+
 const update = ({ mensaje }, id) => {
     return new Promise((resolve, reject) => {
         db.query('update mensajes set mensaje=? where id = ?', [mensaje, id], (err, result) => {
@@ -25,7 +25,7 @@ const update = ({ mensaje }, id) => {
             resolve(result);
         })
     });
-=======
+}
 /* const find = (busqueda) => {
     return new Promise((resolve, reject) => {
         console.log(busqueda);
@@ -44,7 +44,6 @@ const find = (busqueda) => {
             resolve(result);
         })
     })
->>>>>>> 3fc82b9b963fe3a558ce7462a6259062f695724f
 }
 
 const deleteById = (id) => {
