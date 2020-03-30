@@ -11,6 +11,13 @@ router.get('/', async (req, res) => {
     res.json(rows);
 });
 
+//GET http://localhost:3000/api/mensajes/find
+router.post('/find', async (req, res) => {
+    console.log('FIND', req.body);
+    const rows = await Mensaje.find(req.body.busqueda);
+    res.json(rows);
+})
+
 //http://localhost:3000/api/mensajes/new
 router.post('/new', async (req, res) => {
     console.log(req.payload.usuarioId);
@@ -18,25 +25,6 @@ router.post('/new', async (req, res) => {
     const result = await Mensaje.create(req.body);
     res.json(result);
 });
-
-
-// http://localhost:3000/api/mensajes/edit/id
-router.put('/edit/:mensajeId', async (req, res) => {
-
-    const result = await Mensaje.update(req.body, req.params.mensajeId);
-
-    if (result) {
-        res.json(result)
-    } else {
-        res.json({ error: 'Error al actualizar mensaje' })
-    }
-});
-
-/* //http://localhost:3000/api/mensajes/id
-router.delete('/:mensajeId', async (req, res) => {
-    await Mensaje.deleteById(req.params.mensajeId)
-    res.redirect('/');
-}); */
 
 //http://localhost:3000/api/mensajes/
 router.delete('/', async (req, res) => {

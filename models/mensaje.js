@@ -17,6 +17,7 @@ const create = ({ mensaje, fk_usuario }) => {
     })
 }
 
+<<<<<<< HEAD
 const update = ({ mensaje }, id) => {
     return new Promise((resolve, reject) => {
         db.query('update mensajes set mensaje=? where id = ?', [mensaje, id], (err, result) => {
@@ -24,6 +25,26 @@ const update = ({ mensaje }, id) => {
             resolve(result);
         })
     });
+=======
+/* const find = (busqueda) => {
+    return new Promise((resolve, reject) => {
+        console.log(busqueda);
+        db.query('select * from mensajes where mensaje like ?', [`%${busqueda}%`], (err, result) => {
+            if (err) reject(err);
+            resolve(result);
+        })
+    })
+} */
+
+const find = (busqueda) => {
+    return new Promise((resolve, reject) => {
+        console.log(busqueda);
+        db.query('select mensajes.*, usuarios.id as userId, usuarios.image, usuarios.name, usuarios.email from mensajes inner join usuarios on fk_usuario = usuarios.id where mensaje like ? order by fecha_creacion DESC', [`%${busqueda}%`], (err, result) => {
+            if (err) reject(err);
+            resolve(result);
+        })
+    })
+>>>>>>> 3fc82b9b963fe3a558ce7462a6259062f695724f
 }
 
 const deleteById = (id) => {
@@ -42,4 +63,5 @@ module.exports = {
     create: create,
     update: update,
     deleteById: deleteById,
+    find: find
 }
